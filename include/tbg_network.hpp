@@ -6,8 +6,12 @@
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <netdb.h>
+#include <vector>
+#include <stdint.h>
 #include <iostream>
 #include <string>
+
+#define MAX_QUEUED_REQUESTS 128
 
 namespace tuxNetwork
 {
@@ -17,8 +21,8 @@ namespace tuxNetwork
         TuxTcpSocket();
         ~TuxTcpSocket();
         void connect(const std::string &, const int);
-        void send();
-        void receive();
+        size_t send(std::vector<uint8_t> &, size_t);
+        size_t receive(std::vector<uint8_t> &, size_t);
 
     private:
         int sfd;
@@ -27,9 +31,9 @@ namespace tuxNetwork
     class TuxListener
     {
     public:
-        TuxListener();
+        TuxListener(const std::string &, const int);
         ~TuxListener();
-        TuxTcpSocket & accept(const std::string &, const int);
+        TuxTcpSocket & accept();
 
     private:
         int sfd;
