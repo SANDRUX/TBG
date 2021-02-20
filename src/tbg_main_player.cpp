@@ -11,7 +11,16 @@ int main()
 
     // window.setPosition(obj);
     
-    sf::CircleShape shape(50.f);
+    sf::Texture sprite;
+    if (!sprite.loadFromFile("../design/WARRIORTUX.png"))
+    {
+        std::cout << "Could not load texture" << std::endl;
+        return 0;
+    }
+    
+    sf::Sprite shape;
+    shape.setTexture(sprite);
+    // sf::CircleShape shape(50.f);
     // sf::Texture shape;
 
     // if (!shape.loadFromFile("tux.png", sf::IntRect(10, 10, 32, 32)))
@@ -26,7 +35,7 @@ int main()
     player.set_name("Player");
     player.set_coordinate(pos);
 
-    shape.setFillColor(sf::Color(255, 0, 0));
+
 
 
     // run the program as long as the window is open

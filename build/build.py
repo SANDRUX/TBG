@@ -18,5 +18,4 @@ elif platform == "darwin":
 
 os.system('clear')
 
-# os.system("./../bin/server.exe")
-# os.system("./../bin/client.exe")
+os.system("./../bin/run")
