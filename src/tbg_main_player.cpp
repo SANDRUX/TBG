@@ -1,11 +1,12 @@
 #include <tbg_player.hpp>
 #include <tbg_network.hpp>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <iostream>
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "Client", sf::Style::Fullscreen);
+    sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "TBG", sf::Style::Default);
 
     sf::Texture sprite;
 
@@ -25,8 +26,16 @@ int main()
     player.set_name("Player");
     player.set_coordinate(pos);
 
+    sf::SoundBuffer sBuffer;
 
+    if (!sBuffer.loadFromFile("../audio/steps.wav"))
+    {
+        std::cerr << "Error occurred when loading sound buffer from a file!";
+        exit(EXIT_FAILURE);
+    }
 
+    sf::Sound sound;
+    sound.setBuffer(sBuffer);
 
     // run the program as long as the window is open
     while (window.isOpen())
@@ -49,7 +58,8 @@ int main()
                 {
                     pos = player.get_coordinate();
                     pos.x -= 50;
-                    player.set_coordinate(pos);   
+                    player.set_coordinate(pos);
+                    sound.play();
                 }
 
                 else if(event.key.code == sf::Keyboard::Right)
@@ -57,6 +67,7 @@ int main()
                     pos = player.get_coordinate();
                     pos.x += 50;
                     player.set_coordinate(pos);
+                    sound.play();
                 }
 
                 else if(event.key.code == sf::Keyboard::Down)
@@ -64,6 +75,7 @@ int main()
                     pos = player.get_coordinate();
                     pos.y += 50;
                     player.set_coordinate(pos);
+                    sound.play();
                 }
 
                 else if (event.key.code == sf::Keyboard::Up)
@@ -71,22 +83,18 @@ int main()
                     pos = player.get_coordinate();
                     pos.y -= 50;
                     player.set_coordinate(pos);
+                    sound.play();
                 }
             }
                 
         }
 
-
-
-        // clear the window with black color // /home/sandro/MEMES/MANUX.jpg
         window.clear(sf::Color::White);
 
         shape.setPosition(pos.x, pos.y);
         window.draw(shape);
 
         window.display();
-        // }
-        
     }
 
     return 0;
