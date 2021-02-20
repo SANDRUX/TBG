@@ -7,10 +7,15 @@ int main()
 {
     // sf::Vector2i obj(1920,1080);
     // create the window
-    sf::RenderWindow window(sf::VideoMode(1280, 720), "Client", sf::Style::Fullscreen);
+
+
+
+
+    sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "Client", sf::Style::Fullscreen);
 
     // window.setPosition(obj);
     
+
     sf::Texture sprite;
     if (!sprite.loadFromFile("../design/WARRIORTUX.png"))
     {
