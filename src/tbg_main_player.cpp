@@ -5,13 +5,10 @@
 
 int main()
 {
-    // sf::Vector2i obj(1920,1080);
-    // create the window
-    sf::RenderWindow window(sf::VideoMode(1280, 720), "Client", sf::Style::Fullscreen);
+    sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "Client", sf::Style::Fullscreen);
 
-    // window.setPosition(obj);
-    
     sf::Texture sprite;
+
     if (!sprite.loadFromFile("../design/WARRIORTUX.png"))
     {
         std::cout << "Could not load texture" << std::endl;
@@ -20,14 +17,7 @@ int main()
     
     sf::Sprite shape;
     shape.setTexture(sprite);
-    // sf::CircleShape shape(50.f);
-    // sf::Texture shape;
-
-    // if (!shape.loadFromFile("tux.png", sf::IntRect(10, 10, 32, 32)))
-    // {
-    //     // error...
-    // }
-
+    
     player::Position pos{0, 0};
 
     player::Player player;
