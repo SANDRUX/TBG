@@ -2,25 +2,28 @@
 
 tuxNetwork::TuxTcpSocket::TuxTcpSocket()
 {
-    this->sfd = socket(AF_INET, SOCK_STREAM, 0);
+    this->m_sfd = socket(AF_INET, SOCK_STREAM, 0);
 
-    if (sfd == -1)
+    if (m_sfd == -1)
     {
-        std::cerr << "Error caught when creating a socket!" << std::endl;
-        exit(EXIT_FAILURE);
+        throw "Error caught when creating a socket!";
     }
+}
+
+tuxNetwork::TuxTcpSocket::TuxTcpSocket(const int c_sfd)
+{
+    this->m_sfd = c_sfd;
 }
 
 tuxNetwork::TuxTcpSocket::~TuxTcpSocket()
 {
-    if (close(this->sfd))
+    if (close(this->m_sfd))
     {
         std::cerr << "Error caught when closing the socket!" << std::endl;
-        exit(EXIT_FAILURE);
     }
 }
 
-void tuxNetwork::TuxTcpSocket::connect(const std::string & ip, const int portNum)
+int tuxNetwork::TuxTcpSocket::connect(const std::string & ip, const int portNum)
 {
     sockaddr_in * addr = new sockaddr_in;
 
@@ -29,21 +32,24 @@ void tuxNetwork::TuxTcpSocket::connect(const std::string & ip, const int portNum
 
     inet_aton(ip.c_str(), &addr->sin_addr);
 
-    int status = ::connect(this->sfd, (struct sockaddr *)addr, sizeof(sockaddr));
+    int status = ::connect(this->m_sfd, (struct sockaddr *)addr, sizeof(sockaddr));
 
     if (status == -1)
     {
-        throw "Error caught when connecting to a socket!";
+        std::cerr << "Error caught when connecting to a socket!" << std::endl;
+        return -1;
     }
+
+    return 0;
 }
 
 size_t tuxNetwork::TuxTcpSocket::send(std::vector<uint8_t>& buf, size_t size)
 {
-    size_t numWrite = write(this->sfd, buf.data(), size);
+    size_t numWrite = write(this->m_sfd, buf.data(), size);
 
     if (numWrite == -1)
     {
-        throw "Error caught when sending the data!";
+        std::cerr << "Error caught when sending the data!" << std::endl;
         return -1;
     }
 
@@ -52,11 +58,11 @@ size_t tuxNetwork::TuxTcpSocket::send(std::vector<uint8_t>& buf, size_t size)
 
 size_t tuxNetwork::TuxTcpSocket::receive(std::vector<uint8_t> &buf, size_t size)
 {
-    size_t numRead = read(this->sfd, buf.data(), size);
+    size_t numRead = read(this->m_sfd, buf.data(), size);
 
     if (numRead == -1)
     {
-        throw "Error caught when receiving the data!";
+        std::cerr << "Error caught when receiving the data!" << std::endl;
         return -1;
     }
 
@@ -72,45 +78,42 @@ tuxNetwork::TuxListener::TuxListener(const std::string & ip, const int portNum)
 
     inet_aton(ip.c_str(), &addr->sin_addr);
 
-    this->sfd = socket(AF_INET, SOCK_STREAM, 0);
+    this->m_sfd = socket(AF_INET, SOCK_STREAM, 0);
 
-    if (sfd == -1)
+    if (m_sfd == -1)
     {
-        std::cerr << "Error caught when creating a socket!" << std::endl;
-        exit(EXIT_FAILURE);
+        throw "Error caught when creating a socket!";
     }
     
-    if (bind(this->sfd, (sockaddr *)addr, sizeof(sockaddr)))
+    if (bind(this->m_sfd, (sockaddr *)addr, sizeof(sockaddr)))
     {
-        std::cerr << "Error caught when binding a socket!";
-        exit(EXIT_FAILURE);
+        throw "Error caught when binding a socket!";
+        close(m_sfd);
     }
 
-    if (listen(this->sfd, MAX_QUEUED_REQUESTS) == -1)
+    if (listen(this->m_sfd, MAX_QUEUED_REQUESTS) == -1)
     {
-        std::cerr << "Error caught when setting socket as listener!";
-        exit(EXIT_FAILURE);
+        throw "Error caught when setting socket as listener!";
+        close(m_sfd);
     }
 }
 
 tuxNetwork::TuxListener::~TuxListener()
 {
-    //TODO
+    if (close(this->m_sfd))
+    {
+        std::cerr << "Error caught when closing the socket!" << std::endl;
+    }
 }
 
-tuxNetwork::TuxTcpSocket & tuxNetwork::TuxListener::accept()
+tuxNetwork::TuxTcpSocket tuxNetwork::TuxListener::accept()
 {
-    this->cfd = ::accept(this->sfd, NULL, NULL);
+    int l_cfd = ::accept(this->m_sfd, NULL, NULL);
 
-    if (this->cfd == -1)
+    if (l_cfd == -1)
     {
-        std::cerr << "Error caught when accepting a request!";
-        exit(EXIT_FAILURE);
+        throw "Error caught when accepting a request!";
     }
-
-    // tuxNetwork::TuxTcpSocket::TuxTcpSocket obj;
-
-    //TODO
-
-    // return obj;
+    
+    return tuxNetwork::TuxTcpSocket(l_cfd);
 }
