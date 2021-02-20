@@ -2,6 +2,8 @@
 
 ![ ](https://github.com/AlexTutberidze/sfml-game/blob/master/design/WARRIORTUX.png?raw=true)
 
+### Supported OS (Linux / OS X)
+
 ## Build:
 
 ```bash
@@ -9,18 +11,13 @@ cd build
 ./build.py
 ```
 
-
 ## Run:
 
-Open terminals and execute both files separately.
-
-first run server.exe
-then run client.exe
+Open terminal and execute your programm.
 
 ```bash
 cd ../bin
-./server.exe
-./client.exe
+./run
 ```
 
 ## Contributing
