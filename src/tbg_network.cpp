@@ -43,7 +43,7 @@ int tuxNetwork::TuxTcpSocket::connect(const std::string & ip, const int portNum)
     return 0;
 }
 
-size_t tuxNetwork::TuxTcpSocket::send(std::vector<uint8_t>& buf, size_t size)
+size_t tuxNetwork::TuxTcpSocket::send(const std::vector<uint8_t>& buf, size_t size)
 {
     size_t numWrite = write(this->m_sfd, buf.data(), size);
 

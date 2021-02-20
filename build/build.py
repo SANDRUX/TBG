@@ -1,23 +1,24 @@
 #!/usr/bin/env python3
 
 import os
-import platform
+from sys import platform
 
-os.system("sudo apt-get update")
+if platform == "linux" or platform == "linux2":
 
-os.system("sudo apt-get install libsfml-dev")
+    os.system("sudo apt-get update")
+    os.system("sudo apt-get install libsfml-dev")
+    os.system("[ -f /usr/bin/g++ ] && echo g++ is already installed || sudo apt install -y g++")
 
-os.system("[ -f /usr/bin/g++ ] && echo g++ is already installed || sudo apt install -y g++")
+elif platform == "darwin":
 
-os.system("sudo apt-get install python3-pip")
+    os.system("brew install sfml")
+    os.system("[ -f /usr/bin/g++ ] && echo g++ is already installed || brew install g++")
 
-os.system("pip3 install pip-custom-platform")
 
 
-os.system("g++ ../src/server.cpp -o ../bin/server.exe -I ../include -lsfml-graphics -lsfml-window -lsfml-system -lsfml-network")
-os.system("g++ ../src/client.cpp -o ../bin/client.exe -I ../include -lsfml-graphics -lsfml-window -lsfml-system -lsfml-network")
+os.system("g++ ../src/tbg_main_player.cpp ../src/tbg_network.cpp -o ../bin/run -I ../include -lsfml-graphics -lsfml-window -lsfml-system")
 
-os.system('clear' if platform.system() == 'Linux' else 'Windows' 'cls') 
+os.system('clear') 
 
 # os.system("./../bin/server.exe")
 # os.system("./../bin/client.exe")

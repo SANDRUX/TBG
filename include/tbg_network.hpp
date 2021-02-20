@@ -22,7 +22,7 @@ namespace tuxNetwork
         TuxTcpSocket(const int);
         ~TuxTcpSocket();
         int connect(const std::string &, const int);
-        size_t send(std::vector<uint8_t> &, size_t);
+        size_t send(const std::vector<uint8_t> &, size_t);
         size_t receive(std::vector<uint8_t> &, size_t);
 
     private:
