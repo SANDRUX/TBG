@@ -18,4 +18,4 @@ elif platform == "darwin":
 
 os.system('clear')
 
-# os.system("./../bin/run")
+os.system("./../bin/run")
