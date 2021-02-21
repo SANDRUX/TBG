@@ -22,3 +22,11 @@ void tuxSystem::TuxThread::join(void)
         throw "Error caught when waiting to the current thread!";
     }
 }
+
+void tuxSystem::TuxThread::detach(void)
+{
+    if (!pthread_detach(this->m_tid))
+    {
+        throw "Error caught when detaching this thread!";
+    }  
+} 

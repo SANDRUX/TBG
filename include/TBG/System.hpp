@@ -11,6 +11,7 @@ namespace tuxSystem
         TuxThread(void *(*)(void *));
         void launch(pthread_t &, void *);
         void join(void);
+        void detach(void);
         //~TuxThread();
 
     private:
