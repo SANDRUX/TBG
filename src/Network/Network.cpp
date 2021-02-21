@@ -1,6 +1,6 @@
 #include <TBG/Network.hpp>
 
-tuxNetwork::TuxTcpSocket::TuxTcpSocket()
+tuxNetwork::TuxTcpSocket::TuxTcpSocket(void)
 {
     this->m_sfd = socket(AF_INET, SOCK_STREAM, 0);
 
@@ -106,7 +106,7 @@ tuxNetwork::TuxListener::~TuxListener()
     }
 }
 
-tuxNetwork::TuxTcpSocket tuxNetwork::TuxListener::accept()
+tuxNetwork::TuxTcpSocket tuxNetwork::TuxListener::accept(void)
 {
     int l_cfd = ::accept(this->m_sfd, NULL, NULL);
 

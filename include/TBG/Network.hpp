@@ -18,7 +18,7 @@ namespace tuxNetwork
     class TuxTcpSocket
     {
     public:
-        TuxTcpSocket();
+        TuxTcpSocket(void);
         TuxTcpSocket(const int);
         ~TuxTcpSocket();
         int connect(const std::string &, const int);
@@ -34,7 +34,7 @@ namespace tuxNetwork
     public:
         TuxListener(const std::string &, const int);
         ~TuxListener();
-        TuxTcpSocket accept();
+        TuxTcpSocket accept(void);
 
     private:
         int m_sfd;
