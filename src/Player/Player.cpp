@@ -1,5 +1,5 @@
-#include <tbg_player.hpp>
-#include <tbg_network.hpp>
+#include <TBG/Player.hpp>
+#include <TBG/Network.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <iostream>
@@ -18,7 +18,7 @@ int main()
     
     sf::Sprite shape;
     shape.setTexture(sprite);
-    
+
     player::Position pos{0, 0};
 
     player::Player player;
@@ -40,8 +40,6 @@ int main()
     // run the program as long as the window is open
     while (window.isOpen())
     {
-        
-
         // check all the window's events that were triggered since the last iteration of the loop
         sf::Event event;
         while (window.pollEvent(event))

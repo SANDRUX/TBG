@@ -1,4 +1,4 @@
-#include <tbg_network.hpp>
+#include <TBG/Network.hpp>
 
 tuxNetwork::TuxTcpSocket::TuxTcpSocket()
 {
