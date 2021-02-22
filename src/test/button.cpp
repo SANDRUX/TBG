@@ -1,5 +1,7 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
 #include <iostream>
+#include <unistd.h>
 
 int main()
 {
@@ -26,13 +28,13 @@ int main()
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
             {   
                 std::cout << "Button is pressed!" << std::endl;
-                // sf::Vector2i micePos = sf::Mouse::getPosition();
+                sf::Vector2i mpos = sf::Mouse::getPosition(window);
 
-                // if (micePos.x >= float(0) && micePos.x < float(50) && micePos.y >= float(0) && micePos.y < float(50))
-                // {
-                //     std::cout << "Button is pressed!" << std::endl;
-                //     std::cout << micePos.x << " " << micePos.y << std::endl;
-                // }                
+                if (mpos.x >= 0 && mpos.x <= 50 && mpos.x >= 0 && mpos.y <= 50)
+                {
+                    std::cout << mpos.x << " " << mpos.y << std::endl;
+                    shape.setFillColor(sf::Color::Green);
+                }                
             } 
         }
 

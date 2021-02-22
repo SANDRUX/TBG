@@ -19,6 +19,15 @@ int main()
     sf::Sprite shape;
     shape.setTexture(sprite);
 
+
+    sf::Vector2f button_length(100.f, 100.f);
+    sf::RectangleShape button(button_length);
+
+    sf::Vector2f button_position(0.f, 0.f);
+    button.setPosition(button_position);
+
+    button.setFillColor(sf::Color::Green);
+
     tuxPlayer::Position pos{0, 0};
     tuxPlayer::Player player;
 
@@ -36,10 +45,38 @@ int main()
     sf::Sound sound;
     sound.setBuffer(sBuffer);
 
+    bool status = false;
+
+    window.clear(sf::Color::White);
+    window.draw(button);
+    window.display();
+    
     // run the program as long as the window is open
     while (window.isOpen())
     {
         // check all the window's events that were triggered since the last iteration of the loop
+        if (status == false)
+        {
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+            {
+                std::cout << "Button is pressed!" << std::endl;
+                sf::Vector2i mpos = sf::Mouse::getPosition(window);
+
+                if (mpos.x >= 0 && mpos.x <= 50 && mpos.x >= 0 && mpos.y <= 50)
+                {
+                    std::cout << mpos.x << " " << mpos.y << std::endl;
+                    button.setFillColor(sf::Color::Red);
+                }
+                status = true;
+            }
+
+            else
+            {
+                continue;
+            }
+            
+        }
+
         sf::Event event;
         while (window.pollEvent(event))
         {
