@@ -2,7 +2,7 @@
 
 #include <string>
 
-namespace player
+namespace tuxPlayer
 {
     struct Position
     {

@@ -23,11 +23,9 @@ int main()
     sf::Sprite shape;
     shape.setTexture(sprite);
 
+    tuxPlayer::Position pos{0, 0};
 
-    player::Position pos{0, 0};
-
-
-    player::Player player;
+    tuxPlayer::Player player;
 
 
     player.set_name("Player");
@@ -49,11 +47,13 @@ int main()
     button.setPosition(0, 0);
     
     //button color
-    button.setFillColor(sf::Color(150, 50, 250));
+    button.setFillColor(sf::Color(0x00, 0xFF, 0x00));
 
     //button border
     button.setOutlineThickness(2);
     button.setOutlineColor(sf::Color(250, 150, 100));
+
+
 
     sf::Sound sound;
     sound.setBuffer(sBuffer);
@@ -103,27 +103,24 @@ int main()
                     pos.y -= 50;
                     player.set_coordinate(pos);
                     sound.play();
+                }
+
+                else if(event.key.code == sf::Mouse::Left)
+                {
+                    sf::Vector2i mousePosition = sf::Mouse::getPosition();
+
+                    if (mousePosition.x >= 0 && mousePosition.x <= 100 && mousePosition.y >= 0 && mousePosition.y <= 150)
+                    {
+                        button.setFillColor(sf::Color(0xFF, 0x00, 0x00));                        
+                    }
                 }     
             }
-        
-         // button press function 
-            if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-            {
-                std::cout << button.getPosition().x << " " << button.getPosition().y;
-                sf::Vector2i mousePosition = sf::Mouse::getPosition();
-
-                // if (mousePosition.x >= 0 && mousePosition.x <= 100 && mousePosition.y >= 0 && mousePosition.y <= 150)
-                // {
-                //     button.setPosition(100,50);
-                // }
-                
-            }
-            
         }
 
         window.clear(sf::Color::White);
 
         shape.setPosition(pos.x, pos.y);
+        
         window.draw(shape);
         window.draw(button);
 
