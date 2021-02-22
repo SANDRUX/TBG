@@ -6,12 +6,9 @@
 
 int main()
 {
-
     sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "TBG", sf::Style::Default);
 
-
     sf::Texture sprite;
-
 
     if (!sprite.loadFromFile("../design/WARRIORTUX.png"))
     {
@@ -19,41 +16,22 @@ int main()
         return 0;
     }
     
-
     sf::Sprite shape;
     shape.setTexture(sprite);
 
     tuxPlayer::Position pos{0, 0};
-
     tuxPlayer::Player player;
-
 
     player.set_name("Player");
     player.set_coordinate(pos);
 
-
     sf::SoundBuffer sBuffer;
-
 
     if (!sBuffer.loadFromFile("../audio/steps.wav"))
     {
         std::cerr << "Error occurred when loading sound buffer from a file!";
         exit(EXIT_FAILURE);
     }
-
-    // button creation
-    sf::RectangleShape button(sf::Vector2f(100, 150));
-
-    button.setPosition(0, 0);
-    
-    //button color
-    button.setFillColor(sf::Color(0x00, 0xFF, 0x00));
-
-    //button border
-    button.setOutlineThickness(2);
-    button.setOutlineColor(sf::Color(250, 150, 100));
-
-
 
     sf::Sound sound;
     sound.setBuffer(sBuffer);
@@ -103,16 +81,6 @@ int main()
                     pos.y -= 50;
                     player.set_coordinate(pos);
                     sound.play();
-                }
-
-                else if(event.key.code == sf::Mouse::Left)
-                {
-                    sf::Vector2i mousePosition = sf::Mouse::getPosition();
-
-                    if (mousePosition.x >= 0 && mousePosition.x <= 100 && mousePosition.y >= 0 && mousePosition.y <= 150)
-                    {
-                        button.setFillColor(sf::Color(0xFF, 0x00, 0x00));                        
-                    }
                 }     
             }
         }
@@ -120,9 +88,8 @@ int main()
         window.clear(sf::Color::White);
 
         shape.setPosition(pos.x, pos.y);
-        
+
         window.draw(shape);
-        window.draw(button);
 
         window.display();
     }
