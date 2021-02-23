@@ -30,7 +30,7 @@ int main()
     sf::Sprite button;
     button.setTexture(bT);
 
-    sf::Vector2f button_position(910.f, 490.f);
+    sf::Vector2f button_position(0.f, 0.f);
     button.setPosition(button_position);
 
     tuxPlayer::Position pos{0, 0};
@@ -64,7 +64,7 @@ int main()
         {
             sf::Vector2i mpos = sf::Mouse::getPosition(window);
 
-            if (mpos.x >= 910 && mpos.x <= 960 && mpos.x >= 490 && mpos.y <= 540)
+            if (mpos.x >= 0 && mpos.x <= 50 && mpos.x >= 0 && mpos.y <= 50)
             {
                 std::cout << mpos.x << " " << mpos.y << std::endl;
                 break;
