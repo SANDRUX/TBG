@@ -7,7 +7,7 @@
 int main()
 {
     sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "TBG", sf::Style::Default);
-
+    window.setFramerateLimit(20);
     sf::Texture sprite;
 
     if (!sprite.loadFromFile("../design/WARRIORTUX.png"))
@@ -21,7 +21,7 @@ int main()
 
     sf::Texture bT;
 
-    if (!bT.loadFromFile("../design/button.png", sf::IntRect(0, 0, 50, 50)))
+    if (!bT.loadFromFile("../design/button.png", sf::IntRect(0, 0, 200, 80)))
     {
         std::cerr << "Could not load texture" << std::endl;
         return 0;
@@ -30,7 +30,7 @@ int main()
     sf::Sprite button;
     button.setTexture(bT);
 
-    sf::Vector2f button_position(0.f, 0.f);
+    sf::Vector2f button_position(760.f, 460.f);
     button.setPosition(button_position);
 
     tuxPlayer::Position pos{0, 0};
@@ -64,7 +64,7 @@ int main()
         {
             sf::Vector2i mpos = sf::Mouse::getPosition(window);
 
-            if (mpos.x >= 0 && mpos.x <= 50 && mpos.x >= 0 && mpos.y <= 50)
+            if (mpos.x >= 760 && mpos.x <= 960 && mpos.x >= 480 && mpos.y <= 540)
             {
                 std::cout << mpos.x << " " << mpos.y << std::endl;
                 break;
