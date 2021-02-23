@@ -12,21 +12,26 @@ int main()
 
     if (!sprite.loadFromFile("../design/WARRIORTUX.png"))
     {
-        std::cout << "Could not load texture" << std::endl;
+        std::cerr << "Could not load texture" << std::endl;
         return 0;
     }
     
     sf::Sprite shape;
     shape.setTexture(sprite);
 
+    sf::Texture bT;
 
-    sf::Vector2f button_length(100.f, 100.f);
-    sf::RectangleShape button(button_length);
+    if (!bT.loadFromFile("../design/button.png", sf::IntRect(0, 0, 50, 50)))
+    {
+        std::cerr << "Could not load texture" << std::endl;
+        return 0;
+    }
+
+    sf::Sprite button;
+    button.setTexture(bT);
 
     sf::Vector2f button_position(0.f, 0.f);
     button.setPosition(button_position);
-
-    button.setFillColor(sf::Color::Green);
 
     tuxPlayer::Position pos{0, 0};
     tuxPlayer::Player player;
@@ -52,31 +57,25 @@ int main()
     window.display();
     
     // run the program as long as the window is open
+
+    while (true)
+    {
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        {
+            sf::Vector2i mpos = sf::Mouse::getPosition(window);
+
+            if (mpos.x >= 0 && mpos.x <= 50 && mpos.x >= 0 && mpos.y <= 50)
+            {
+                std::cout << mpos.x << " " << mpos.y << std::endl;
+                break;
+            }
+        }
+    }
+    
+
     while (window.isOpen())
     {
         // check all the window's events that were triggered since the last iteration of the loop
-        if (status == false)
-        {
-            if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-            {
-                std::cout << "Button is pressed!" << std::endl;
-                sf::Vector2i mpos = sf::Mouse::getPosition(window);
-
-                if (mpos.x >= 0 && mpos.x <= 50 && mpos.x >= 0 && mpos.y <= 50)
-                {
-                    std::cout << mpos.x << " " << mpos.y << std::endl;
-                    button.setFillColor(sf::Color::Red);
-                }
-                status = true;
-            }
-
-            else
-            {
-                continue;
-            }
-            
-        }
-
         sf::Event event;
         while (window.pollEvent(event))
         {
