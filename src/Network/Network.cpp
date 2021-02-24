@@ -1,6 +1,5 @@
 #include <TBG/Network.hpp>
 #include <TBG/Exception.hpp>
-#include <TBG/Exception.hpp>
 
 tuxNetwork::TuxTcpSocket::TuxTcpSocket(void)
 {
