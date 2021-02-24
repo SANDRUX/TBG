@@ -1,4 +1,5 @@
 #include <TBG/System.hpp>
+#include <TBG/Exception.hpp>
 
 tuxSystem::TuxThread::TuxThread(void *(*func)(void * ))
 {
@@ -11,7 +12,7 @@ void tuxSystem::TuxThread::launch(pthread_t & tid, void * opaque)
 
     if (!pthread_create(&this->m_tid, NULL, this->m_thread_func, opaque))
     {
-        throw "Error caught when creating a thread!";
+        throw tuxException::TuxException("Error caught when creating a thread!");
     }
 }
 
@@ -19,7 +20,7 @@ void tuxSystem::TuxThread::join(void)
 {
     if (!pthread_join(this->m_tid, NULL))
     {
-        throw "Error caught when waiting to the current thread!";
+        throw tuxException::TuxException("Error caught when waiting to the current thread!");
     }
 }
 
@@ -27,6 +28,6 @@ void tuxSystem::TuxThread::detach(void)
 {
     if (!pthread_detach(this->m_tid))
     {
-        throw "Error caught when detaching this thread!";
+        throw tuxException::TuxException("Error caught when detaching this thread!");
     }  
 } 

@@ -1,4 +1,6 @@
 #include <TBG/Network.hpp>
+#include <TBG/Exception.hpp>
+#include <TBG/Exception.hpp>
 
 tuxNetwork::TuxTcpSocket::TuxTcpSocket(void)
 {
@@ -6,7 +8,7 @@ tuxNetwork::TuxTcpSocket::TuxTcpSocket(void)
 
     if (m_sfd == -1)
     {
-        throw "Error caught when creating a socket!";
+        throw tuxException::TuxException("Error caught when creating a socket!");
     }
 }
 
@@ -82,18 +84,18 @@ tuxNetwork::TuxListener::TuxListener(const std::string & ip, const int portNum)
 
     if (m_sfd == -1)
     {
-        throw "Error caught when creating a socket!";
+        throw tuxException::TuxException("Error caught when creating a socket!");
     }
     
     if (bind(this->m_sfd, (sockaddr *)addr, sizeof(sockaddr)))
     {
-        throw "Error caught when binding a socket!";
+        throw tuxException::TuxException("Error caught when binding a socket!");
         close(m_sfd);
     }
 
     if (listen(this->m_sfd, MAX_QUEUED_REQUESTS) == -1)
     {
-        throw "Error caught when setting socket as listener!";
+        throw tuxException::TuxException("Error caught when setting socket as listener!");
         close(m_sfd);
     }
 }
@@ -112,7 +114,7 @@ tuxNetwork::TuxTcpSocket tuxNetwork::TuxListener::accept(void)
 
     if (l_cfd == -1)
     {
-        throw "Error caught when accepting a request!";
+        throw tuxException::TuxException("Error caught when accepting a request!");
     }
     
     return tuxNetwork::TuxTcpSocket(l_cfd);
