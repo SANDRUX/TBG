@@ -31,3 +31,32 @@ void tuxSystem::TuxThread::detach(void)
         throw tuxException::TuxException("Error caught when detaching this thread!");
     }  
 } 
+
+tuxSystem::TuxMutex::TuxMutex(void)
+{
+    this->m_mtx = PTHREAD_MUTEX_INITIALIZER;
+}
+
+void tuxSystem::TuxMutex::lock(void)
+{
+    if (pthread_mutex_lock(&this->m_mtx))
+    {
+        throw tuxException::TuxException("Error caught when locking the mutex!");
+    }
+}
+
+void tuxSystem::TuxMutex::unlock(void)
+{
+    if (pthread_mutex_unlock(&this->m_mtx))
+    {
+        throw tuxException::TuxException("Error caught when unlocking the mutex!");
+    }
+}
+
+tuxSystem::TuxMutex::~TuxMutex(void)
+{
+    if (pthread_mutex_destroy(&this->m_mtx))
+    {
+        std::cerr << "Error caught in Destructor when destroying the mutex!" << std::endl;
+    }
+}

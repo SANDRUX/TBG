@@ -18,4 +18,23 @@ namespace tuxSystem
         void *(*m_thread_func)(void *);
         pthread_t m_tid;
     };
+
+    class TuxMutex
+    {
+    public:
+
+        TuxMutex(void);
+        ~TuxMutex();
+        void lock(void);
+        void unlock(void);
+
+    private:
+
+        pthread_mutex_t m_mtx;
+    };
+
+    class TuxLoop
+    {
+        
+    };
 };

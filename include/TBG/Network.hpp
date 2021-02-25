@@ -24,6 +24,7 @@ namespace tuxNetwork
         int connect(const std::string &, const int);
         size_t send(const std::vector<uint8_t> &, size_t);
         size_t receive(std::vector<uint8_t> &, size_t);
+        inline const int get_sfd(void) const { return this->m_sfd; }
 
     private:
         int m_sfd;
