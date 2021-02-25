@@ -56,5 +56,7 @@ int main()
         std::cout << data[0] << " " << data[1] << std::endl;
     }
 
+    std::cout << "Connection established and closed! ";
+
     return 0;
 }
