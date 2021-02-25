@@ -50,8 +50,8 @@ int main()
     }
 
     std::vector<uint8_t> data;
-    
-    while(client[0].receive(data, 2))
+
+    while (client[0].receive(data, 2) != -1 || client[0].receive(data, 2) != 0)
     {
         std::cout << data[0] << " " << data[1] << std::endl;
     }

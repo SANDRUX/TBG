@@ -20,7 +20,7 @@ tuxNetwork::TuxTcpSocket::~TuxTcpSocket()
 {
     if (close(this->m_sfd))
     {
-        std::cerr << "Error caught when closing the socket!" << std::endl;
+        std::cerr << "Could not close the socket, Error occurred or already closed!" << std::endl;
     }
 }
 
@@ -53,6 +53,15 @@ size_t tuxNetwork::TuxTcpSocket::send(const std::vector<uint8_t>& buf, size_t si
         std::cerr << "Error caught when sending the data!" << std::endl;
         return -1;
     }
+    
+    else if (!numWrite)
+    {
+        if (close(this->m_sfd))
+        {
+            std::cerr << "Error caught when closing the socket!" << std::endl;
+            return 0;
+        }
+    }
 
     return numWrite;
 }
@@ -74,6 +83,15 @@ size_t tuxNetwork::TuxTcpSocket::receive(std::vector<uint8_t> &buf, size_t size)
     {
         std::cerr << "Error caught when receiving the data!" << std::endl;
         return -1;
+    }
+
+    else if (!numRead)
+    {
+        if (close(this->m_sfd))
+        {
+            std::cerr << "Error caught when closing the socket!" << std::endl;
+            return 0;
+        }
     }
 
     return numRead;
