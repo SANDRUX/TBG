@@ -59,7 +59,16 @@ size_t tuxNetwork::TuxTcpSocket::send(const std::vector<uint8_t>& buf, size_t si
 
 size_t tuxNetwork::TuxTcpSocket::receive(std::vector<uint8_t> &buf, size_t size)
 {
-    size_t numRead = read(this->m_sfd, buf.data(), size);
+    buf.clear();
+
+    uint8_t temp[size];
+
+    size_t numRead = read(this->m_sfd, temp, size);
+
+    for (int i = 0; i < (int)size; i++)
+    {
+        buf.push_back(temp[i]);
+    }
 
     if (numRead == -1)
     {

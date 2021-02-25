@@ -2,6 +2,7 @@
 #include <TBG/System.hpp>
 #include <TBG/Player.hpp>
 #include <vector>
+#include <iostream>
 
 std::vector<tuxNetwork::TuxTcpSocket> client;
 
@@ -47,6 +48,13 @@ int main()
         std::cerr << e.what();
         exit(EXIT_FAILURE);
     }
+
+    std::vector<uint8_t> data;
     
+    while(client[0].receive(data, 2))
+    {
+        std::cout << data[0] << " " << data[1] << std::endl;
+    }
+
     return 0;
 }
