@@ -1,0 +1,1 @@
+gitignore file is stored in TBG development directory
