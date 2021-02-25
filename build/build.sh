@@ -3,6 +3,8 @@
 export TBG_INCLUDE=$HOME/TBG/include
 export TBG_SRC=$HOME/TBG/src
 
+    unameOut="$(uname -s)"
+
     if [[ ${unameOut} -eq Linux ]]
     then
         sudo apt-get update
