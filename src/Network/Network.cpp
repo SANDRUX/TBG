@@ -24,7 +24,7 @@ tuxNetwork::TuxTcpSocket::~TuxTcpSocket()
     }
 }
 
-int tuxNetwork::TuxTcpSocket::connect(const std::string & ip, const int portNum)
+void tuxNetwork::TuxTcpSocket::connect(const std::string & ip, const int portNum)
 {
     sockaddr_in * addr = new sockaddr_in;
 
@@ -37,11 +37,8 @@ int tuxNetwork::TuxTcpSocket::connect(const std::string & ip, const int portNum)
 
     if (status == -1)
     {
-        std::cerr << "Error caught when connecting to a socket!" << std::endl;
-        return -1;
+       throw tuxException::TuxException("Error caught when connecting to a socket!");
     }
-
-    return 0;
 }
 
 size_t tuxNetwork::TuxTcpSocket::send(const std::vector<uint8_t>& buf, size_t size)

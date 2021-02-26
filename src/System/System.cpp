@@ -119,7 +119,7 @@ void tuxSystem::TuxLoop::loop_ctl(const int events, tuxNetwork::TuxTcpSocket * t
     }
 }
 
-void tuxSystem::TuxLoop::loop_launch(int (*event_handler)(void * arg), void * opaque, const int timeval)
+void tuxSystem::TuxLoop::loop_launch(int (*loop_handler)(void *, void *),const int timeval)
 {
     while (1)
     {
@@ -139,11 +139,11 @@ void tuxSystem::TuxLoop::loop_launch(int (*event_handler)(void * arg), void * op
 
         for (int i = 0; i < ready; i++)
         {
-            if (this->m_evlist[i].events & this->m_events)
+            if (this->m_evlist[i].events)
             {
-                if (event_handler(opaque))
+                if (loop_handler(reinterpret_cast<void *>(&this->m_evlist[i].events), reinterpret_cast<void *>(&this->m_evlist[i].data.fd)) == -1);
                 {
-                    return;
+                    tuxException::TuxException("Error caught when invoking the handler!");
                 }
             }
         }

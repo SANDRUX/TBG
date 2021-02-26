@@ -54,7 +54,7 @@ namespace tuxSystem
         TuxLoop(const size_t); //opens epoll and initializes m_epoll_fd
         TuxLoop();
         void loop_ctl(const int ,tuxNetwork::TuxTcpSocket *, const size_t); //event, fd array, size
-        void loop_launch(int (*)(void *), void *, const int);
+        void loop_launch(int (*)(void *, void *), const int);
 
     private:
 
