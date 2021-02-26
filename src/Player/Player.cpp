@@ -7,7 +7,9 @@
 int main()
 {
     sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "TBG", sf::Style::Default);
-    window.setFramerateLimit(20);
+
+    std::cout << sf::VideoMode::getDesktopMode().height << " " << sf::VideoMode::getDesktopMode().width;
+    window.setFramerateLimit(60);
     sf::Texture sprite;
 
     if (!sprite.loadFromFile("../design/WARRIORTUX.png"))
@@ -86,6 +88,12 @@ int main()
 
             else if (event.type == sf::Event::KeyPressed)
             {
+                if (pos.y > sf::VideoMode::getDesktopMode().height || pos.y < 0 || pos.x > sf::VideoMode::getDesktopMode().width || pos.x < 0)
+                {
+                    pos.x = 0;
+                    pos.y = 0;
+                }
+                
                 if (event.key.code == sf::Keyboard::Left)
                 {
                     pos = player.get_coordinate();
@@ -94,7 +102,7 @@ int main()
                     sound.play();
                 }
 
-                else if(event.key.code == sf::Keyboard::Right)
+                else if (event.key.code == sf::Keyboard::Right)
                 {
                     pos = player.get_coordinate();
                     pos.x += 50;
@@ -102,7 +110,7 @@ int main()
                     sound.play();
                 }
 
-                else if(event.key.code == sf::Keyboard::Down)
+                else if (event.key.code == sf::Keyboard::Down)
                 {
                     pos = player.get_coordinate();
                     pos.y += 50;
@@ -121,6 +129,8 @@ int main()
         }
 
         window.clear(sf::Color::White);
+
+        std::cout << pos.x << " " << pos.y << std::endl;
 
         shape.setPosition(pos.x, pos.y);
 
