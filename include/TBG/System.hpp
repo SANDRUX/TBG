@@ -51,12 +51,17 @@ namespace tuxSystem
     {
     public:
 
-        TuxLoop(); //opens epoll and initializes m_epoll_fd
-        int loop_ctl(const int ,int *, const size_t); //event, fd array, size
-        int loop_launch(tuxNetwork::TuxTcpSocket *, const int = MAX_EVENTS);
+        TuxLoop(const size_t); //opens epoll and initializes m_epoll_fd
+        TuxLoop();
+        void loop_ctl(const int ,tuxNetwork::TuxTcpSocket *, const size_t); //event, fd array, size
+        void loop_launch(int (*)(void *), void *, const int);
 
     private:
 
         int m_epoll_fd; //epoll file descriptor
+        int m_size = 0;
+        int * m_sfd;
+        int m_events;
+        epoll_event * m_evlist;
     };
 };
