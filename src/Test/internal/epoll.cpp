@@ -5,8 +5,7 @@
 #define MAX_BUF     1000        /* Maximum bytes fetched by a single read() */
 #define MAX_EVENTS     5        /* Maximum number of events to be returned from
                                    a single epoll_wait() call */
-int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     int epfd, ready, fd, s, j, numOpenFds;
     struct epoll_event ev;
