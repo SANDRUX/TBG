@@ -9,7 +9,7 @@ int main()
     sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "TBG", sf::Style::Default);
 
     std::cout << sf::VideoMode::getDesktopMode().height << " " << sf::VideoMode::getDesktopMode().width;
-    window.setFramerateLimit(60);
+    window.setFramerateLimit(20);
     sf::Texture sprite;
 
     if (!sprite.loadFromFile("../design/WARRIORTUX.png"))
@@ -76,22 +76,70 @@ int main()
 
     while (window.isOpen())
     {
+
+
         // check all the window's events that were triggered since the last iteration of the loop
         sf::Event event;
         while (window.pollEvent(event))
         {
+
+
             // "close requested" event: we close the window
             if (event.type == sf::Event::Closed)
             {
                 window.close();
             }
 
+
+
+
+
             else if (event.type == sf::Event::KeyPressed)
             {
-                if (pos.y > sf::VideoMode::getDesktopMode().height || pos.y < 0 || pos.x > sf::VideoMode::getDesktopMode().width || pos.x < 0)
+                if (pos.y + 366 > sf::VideoMode::getDesktopMode().height)
                 {
-                    pos.x = 0;
-                    pos.y = 0;
+                    pos = player.get_coordinate();
+                    pos.y -= 50;
+                    player.set_coordinate(pos);
+                    // continue;
+                    std::cout << "mushaa1" << std::endl;
+                    break;
+
+                }
+                else if (pos.y  < 0)
+                {
+                    pos = player.get_coordinate();
+                    pos.y += 50;
+                    player.set_coordinate(pos);
+                    // continue;
+
+                    std::cout << "mushaa2" << std::endl;
+                    break;
+
+                }
+                else if (pos.x + 366 > sf::VideoMode::getDesktopMode().width)
+                {
+                    pos = player.get_coordinate();
+                    pos.x -= 50;
+                    player.set_coordinate(pos);
+                    // continue;
+
+                    std::cout << "mushaa3" << std::endl;
+                    break;
+
+
+                }
+                else if (pos.x  < 0)
+                {
+                    pos = player.get_coordinate();
+
+                    pos.x += 50;
+                    player.set_coordinate(pos);
+                    // continue;
+
+                    std::cout << "mushaa4" << std::endl;
+                    break;
+
                 }
                 
                 if (event.key.code == sf::Keyboard::Left)
@@ -131,6 +179,8 @@ int main()
         window.clear(sf::Color::White);
 
         std::cout << pos.x << " " << pos.y << std::endl;
+        
+        pos = player.get_coordinate();
 
         shape.setPosition(pos.x, pos.y);
 
