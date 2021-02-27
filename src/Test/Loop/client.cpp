@@ -5,7 +5,6 @@
 
 int main()
 {
-    char buff[10];
     std::string ip;
     int port;
 
