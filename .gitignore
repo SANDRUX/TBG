@@ -1,2 +1,7 @@
 # Untrack files
-bin/run
+bin/*
+
+#ignore VS CODE generated Hidden directory
+
+.vscode
+.vs
