@@ -32,6 +32,8 @@ int main()
                     return -1;
                 }
             }
+            return 0;
+
         }, 0);
     }
     catch(const std::exception& e)
@@ -39,7 +41,5 @@ int main()
         std::cerr << e.what() << '\n';
     }
     
-
-
     return 0;
 }

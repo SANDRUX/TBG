@@ -34,11 +34,14 @@ int main()
 
                 std::cout << buffer[0] << " " << buffer[1] << std::endl;
             }
+            return 0;
+
         }, 0);
     }
     catch(const std::exception & e)
     {
         std::cerr << e.what() << std::endl;
     }
+    
     return 0;
 }

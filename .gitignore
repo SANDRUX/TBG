@@ -5,3 +5,7 @@ bin/*
 
 .vscode
 .vs
+
+
+#ignore executible files
+*.exe
