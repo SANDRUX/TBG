@@ -8,7 +8,7 @@
 
 ```bash
 cd build
-./build.py
+./build.sh
 ```
 
 ## Run:

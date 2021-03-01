@@ -17,4 +17,4 @@ export TBG_SRC=$HOME/TBG/src
         [ -f /usr/bin/g++ ] && echo g++ is already installed || brew install g++
     fi
 
-    g++ $TBG_SRC/Player/Player.cpp $TBG_SRC/Network/Network.cpp $TBG_SRC/System/System.cpp -o ../bin/run -I $TBG_INCLUDE/. -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -pthread
+    g++ $TBG_SRC/player/player.cpp $TBG_SRC/network/network.cpp $TBG_SRC/system/loop.cpp $TBG_SRC/system/thread.cpp -o ../bin/run -I $TBG_INCLUDE/. -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -pthread
