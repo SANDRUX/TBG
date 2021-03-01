@@ -20,9 +20,8 @@ int main()
 
         loop.loop_ctl(EPOLLOUT, &client, 1);
 
-        loop.loop_launch([](void *events, void *sfd) -> int 
-        {
-            int buffer[2] = {1,2};
+        loop.loop_launch([](void *events, void *sfd) -> int {
+            int buffer[2] = {1, 2};
 
             if (*reinterpret_cast<int *>(events) == EPOLLOUT)
             {
@@ -33,13 +32,12 @@ int main()
                 }
             }
             return 0;
-
         }, 0);
     }
-    catch(const std::exception& e)
+    catch (const std::exception &e)
     {
         std::cerr << e.what() << '\n';
     }
-    
+
     return 0;
 }
