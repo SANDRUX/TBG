@@ -11,7 +11,7 @@ namespace tuxPlayer
     };
 
     class Player
-    {
+    {        
     public:
         inline void set_coordinate(const Position & coordinate) { this->m_coordinate = coordinate; }
         inline const Position &get_coordinate(void) const { return this->m_coordinate; }

@@ -19,6 +19,6 @@ namespace tuxException
     private:
 
         std::string m_error{};
-        
     };
 }
+

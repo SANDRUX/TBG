@@ -2,6 +2,9 @@
 #include <TBG/Network.hpp>
 #include <TBG/Exception.hpp>
 #include <TBG/Player.hpp>
+#include <vector>
+
+std::vector<tuxNetwork::TuxTcpSocket> client;
 
 int main()
 {
@@ -13,12 +16,20 @@ int main()
 
     try
     {
-        tuxNetwork::TuxListener obj(ip, port);
-        tuxNetwork::TuxTcpSocket client = obj.accept();
+        tuxNetwork::TuxListener listener(ip, port);
+
+        tuxSystem::TuxThread handle_requests(
+            [](void *arg) -> void * 
+            {
+                while(1)
+                {
+                    client.push_back(reinterpret_cast<tuxNetwork::TuxListener *>(arg)->accept());
+                }
+            });
 
         tuxSystem::TuxLoop loop(1);
 
-        loop.loop_ctl(EPOLLOUT, &client, 1);
+        loop.loop_ctl(EPOLLOUT, client.data(), client.size());
 
         loop.loop_launch([](void *events, void *sfd) -> int {
             int buffer[2] = {1, 2};
