@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <iostream>
+#include "OBJ/bad_guy.hpp"
 
 int main()
 {
@@ -34,9 +35,6 @@ int main()
 
     sf::Vector2f button_position(760.f, 460.f);
     button.setPosition(button_position);
-
-    tuxPlayer::Position pos{0, 0};
-    tuxPlayer::Player player;
 
     player.set_name("Player");
     player.set_coordinate(pos);
@@ -99,51 +97,51 @@ int main()
 
             else if (event.type == sf::Event::KeyPressed)
             {
-                if (pos.y + 366 > sf::VideoMode::getDesktopMode().height)
-                {
-                    pos = player.get_coordinate();
-                    pos.y -= 50;
-                    player.set_coordinate(pos);
-                    // continue;
-                    std::cout << "mushaa1" << std::endl;
-                    break;
+                // if (pos.y + 366 > sf::VideoMode::getDesktopMode().height)
+                // {
+                //     pos = player.get_coordinate();
+                //     pos.y -= 50;
+                //     player.set_coordinate(pos);
+                //     // continue;
+                //     std::cout << "mushaa1" << std::endl;
+                //     break;
 
-                }
-                else if (pos.y  < 0)
-                {
-                    pos = player.get_coordinate();
-                    pos.y += 50;
-                    player.set_coordinate(pos);
-                    // continue;
+                // }
+                // else if (pos.y  < 0)
+                // {
+                //     pos = player.get_coordinate();
+                //     pos.y += 50;
+                //     player.set_coordinate(pos);
+                //     // continue;
 
-                    std::cout << "mushaa2" << std::endl;
-                    break;
+                //     std::cout << "mushaa2" << std::endl;
+                //     break;
 
-                }
-                else if (pos.x + 366 > sf::VideoMode::getDesktopMode().width)
-                {
-                    pos = player.get_coordinate();
-                    pos.x -= 50;
-                    player.set_coordinate(pos);
-                    // continue;
+                // }
+                // else if (pos.x + 366 > sf::VideoMode::getDesktopMode().width)
+                // {
+                //     pos = player.get_coordinate();
+                //     pos.x -= 50;
+                //     player.set_coordinate(pos);
+                //     // continue;
 
-                    std::cout << "mushaa3" << std::endl;
-                    break;
+                //     std::cout << "mushaa3" << std::endl;
+                //     break;
 
 
-                }
-                else if (pos.x  < 0)
-                {
-                    pos = player.get_coordinate();
+                // }
+                // else if (pos.x  < 0)
+                // {
+                //     pos = player.get_coordinate();
 
-                    pos.x += 50;
-                    player.set_coordinate(pos);
-                    // continue;
+                //     pos.x += 50;
+                //     player.set_coordinate(pos);
+                //     // continue;
 
-                    std::cout << "mushaa4" << std::endl;
-                    break;
+                //     std::cout << "mushaa4" << std::endl;
+                //     break;
 
-                }
+                // }
                 
                 if (event.key.code == sf::Keyboard::Left)
                 {
