@@ -52,6 +52,16 @@ int main()
     sf::Sound sound;
     sound.setBuffer(sBuffer);
 
+    sf::Music intro;
+
+    if(!intro.openFromFile("../audio/beeh.wav"))
+    {
+        std::cerr << "Error caught when loading the musick from a file!";
+        return -1;
+    }
+
+    intro.play();
+
     bool status = false;
 
     window.clear(sf::Color::White);
@@ -69,6 +79,7 @@ int main()
             if (mpos.x >= 760 && mpos.x <= 960 && mpos.x >= 480 && mpos.y <= 540)
             {
                 std::cout << mpos.x << " " << mpos.y << std::endl;
+                intro.stop();
                 break;
             }
         }

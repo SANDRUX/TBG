@@ -25,6 +25,7 @@ namespace tuxSystem
         void launch(pthread_t &, void *);
         void join(void);
         void detach(void);
+        void cancel(void);
         //~TuxThread();
 
     private:
