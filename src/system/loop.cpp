@@ -81,8 +81,7 @@ void tuxSystem::TuxLoop::loop_launch(int (*loop_handler)(void *, void *), const 
         {
             if (this->m_evlist[i].events)
             {
-                if (loop_handler(reinterpret_cast<void *>(&this->m_evlist[i].events), reinterpret_cast<void *>(&this->m_evlist[i].data.fd)) == -1)
-                    ;
+                if (loop_handler(static_cast<void *>(&this->m_evlist[i].events), static_cast<void *>(&this->m_evlist[i].data.fd)) == -1)                
                 {
                     tuxException::TuxException("Error caught when invoking the handler!");
                 }
