@@ -5,38 +5,37 @@
 #include "bad_guy.hpp"
 #include <iostream>
 
+extern tuxPlayer::Player player;
+extern tuxPlayer::Position pos;
+
+extern tuxPlayer::Player *bGuy;
+extern tuxPlayer::Position bPos;
+
 void * bad_guy(void * arg)
 {
-    static int b_x = 0, b_y = 0;
-
-    tuxPlayer::Player pos = *static_cast<tuxPlayer::Player *>(arg);
-
-
-    if (b_x > pos.get_coordinate().x)
+    if (bGuy->get_coordinate().x > player.get_coordinate().x)
     {
-        b_x -= 5;
+        bPos.x -= 10;
+        bGuy->set_coordinate(bPos);
     }
 
-    else if (b_x < pos.get_coordinate().x)
+    else if (bGuy->get_coordinate().x < player.get_coordinate().x)
     {
-        b_x += 5;
+        bPos.x += 10;
+        bGuy->set_coordinate(bPos);
     }
 
-    if (b_y > pos.get_coordinate().y)
+    if (bGuy->get_coordinate().y > player.get_coordinate().y)
     {
-        b_y -= 5;
+        bPos.y -= 10;
+        bGuy->set_coordinate(bPos);
     }
 
-    else if (b_y > pos.get_coordinate().y)
+    else if (bGuy->get_coordinate().y < player.get_coordinate().y)
     {
-        b_y -= 5;
+        bPos.y += 10;
+        bGuy->set_coordinate(bPos);
     }
 
-    tuxPlayer::Player curr;
-
-    tuxPlayer::Position curr_pos {b_x, b_y};
-
-    curr.set_coordinate(curr_pos);
-
-    return &curr;
+    return static_cast<void *>(nullptr);
 }

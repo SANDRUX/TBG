@@ -6,7 +6,4 @@
 #include <SFML/Audio.hpp>
 #include <iostream>
 
-tuxPlayer::Position b_pos{0, 0};
-tuxPlayer::Player b_player;
-
 void * bad_guy(void *);

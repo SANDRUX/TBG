@@ -1,9 +1,74 @@
 #include <TBG/Player.hpp>
 #include <TBG/Network.hpp>
+#include <TBG/System.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <iostream>
-#include "OBJ/bad_guy.hpp"
+#include "bad_guy.hpp"
+
+tuxSystem::TuxMutex mtx;
+
+tuxPlayer::Player player;
+tuxPlayer::Position pos{0, 0};
+
+tuxPlayer::Player * bGuy = new tuxPlayer::Player;
+tuxPlayer::Position bPos{1000, 1000};
+
+// void *bad_guy(void *arg)
+// {
+//     if (bGuy->get_coordinate().x > player.get_coordinate().x)
+//     {
+//         bPos.x -= 10;
+//         bGuy->set_coordinate(bPos);
+//     }
+
+//     else if (bGuy->get_coordinate().x < player.get_coordinate().x)
+//     {
+//         bPos.x += 10;
+//         bGuy->set_coordinate(bPos);
+//     }
+
+//     if (bGuy->get_coordinate().y > player.get_coordinate().y)
+//     {
+//         bPos.y -= 10;
+//         bGuy->set_coordinate(bPos);
+//     }
+
+//     else if (bGuy->get_coordinate().y < player.get_coordinate().y)
+//     {
+//         bPos.y += 10;
+//         bGuy->set_coordinate(bPos);
+//     }
+
+//     return static_cast<void *>(nullptr);
+// }
+
+void * thread_func(void * arg)
+{
+    try
+   {
+        while(true)
+        {
+            do
+            {
+                mtx.lock();
+
+                bad_guy(static_cast<void *>(&player));
+
+                mtx.unlock();
+
+                usleep(200000);
+
+            } while (bGuy->get_coordinate().x != player.get_coordinate().x && bGuy->get_coordinate().y != player.get_coordinate().y);
+        }
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+
+    return nullptr;
+}
 
 int main()
 {
@@ -68,6 +133,20 @@ int main()
     
     // run the program as long as the window is open
 
+    tuxSystem::TuxThread bad_guy(thread_func);
+
+    bGuy = new tuxPlayer::Player;
+
+    bGuy->set_coordinate(bPos);
+
+    sf::CircleShape b_shape(50.f);
+
+    b_shape.setFillColor(sf::Color(0xFF, 0, 0));
+
+    sf::Vector2f temp(bGuy->get_coordinate().x, bGuy->get_coordinate().y);
+
+    b_shape.setPosition(temp);
+
     while (true)
     {
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
@@ -82,6 +161,10 @@ int main()
             }
         }
     }
+
+    pthread_t tid;
+
+    bad_guy.launch(tid, nullptr);
 
     while (window.isOpen())
     {
@@ -142,7 +225,9 @@ int main()
                 //     break;
 
                 // }
-                
+
+                mtx.lock();
+
                 if (event.key.code == sf::Keyboard::Left)
                 {
                     pos = player.get_coordinate();
@@ -174,6 +259,8 @@ int main()
                     player.set_coordinate(pos);
                     sound.play();
                 }     
+
+                mtx.unlock();
             }
         }
 
@@ -184,8 +271,10 @@ int main()
         pos = player.get_coordinate();
 
         shape.setPosition(pos.x, pos.y);
-
+        b_shape.setPosition(bGuy->get_coordinate().x, bGuy->get_coordinate().y);
+        
         window.draw(shape);
+        window.draw(b_shape);
 
         window.display();
     }
