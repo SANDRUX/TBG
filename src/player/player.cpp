@@ -14,35 +14,6 @@ tuxPlayer::Position pos{0, 0};
 tuxPlayer::Player * bGuy = new tuxPlayer::Player;
 tuxPlayer::Position bPos{1000, 1000};
 
-// void *bad_guy(void *arg)
-// {
-//     if (bGuy->get_coordinate().x > player.get_coordinate().x)
-//     {
-//         bPos.x -= 10;
-//         bGuy->set_coordinate(bPos);
-//     }
-
-//     else if (bGuy->get_coordinate().x < player.get_coordinate().x)
-//     {
-//         bPos.x += 10;
-//         bGuy->set_coordinate(bPos);
-//     }
-
-//     if (bGuy->get_coordinate().y > player.get_coordinate().y)
-//     {
-//         bPos.y -= 10;
-//         bGuy->set_coordinate(bPos);
-//     }
-
-//     else if (bGuy->get_coordinate().y < player.get_coordinate().y)
-//     {
-//         bPos.y += 10;
-//         bGuy->set_coordinate(bPos);
-//     }
-
-//     return static_cast<void *>(nullptr);
-// }
-
 void * thread_func(void * arg)
 {
     try
@@ -180,52 +151,6 @@ int main()
 
             else if (event.type == sf::Event::KeyPressed)
             {
-                // if (pos.y + 366 > sf::VideoMode::getDesktopMode().height)
-                // {
-                //     pos = player.get_coordinate();
-                //     pos.y -= 50;
-                //     player.set_coordinate(pos);
-                //     // continue;
-                //     std::cout << "mushaa1" << std::endl;
-                //     break;
-
-                // }
-                // else if (pos.y  < 0)
-                // {
-                //     pos = player.get_coordinate();
-                //     pos.y += 50;
-                //     player.set_coordinate(pos);
-                //     // continue;
-
-                //     std::cout << "mushaa2" << std::endl;
-                //     break;
-
-                // }
-                // else if (pos.x + 366 > sf::VideoMode::getDesktopMode().width)
-                // {
-                //     pos = player.get_coordinate();
-                //     pos.x -= 50;
-                //     player.set_coordinate(pos);
-                //     // continue;
-
-                //     std::cout << "mushaa3" << std::endl;
-                //     break;
-
-
-                // }
-                // else if (pos.x  < 0)
-                // {
-                //     pos = player.get_coordinate();
-
-                //     pos.x += 50;
-                //     player.set_coordinate(pos);
-                //     // continue;
-
-                //     std::cout << "mushaa4" << std::endl;
-                //     break;
-
-                // }
-
                 mtx.lock();
 
                 if (event.key.code == sf::Keyboard::Left)
