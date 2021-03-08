@@ -4,11 +4,24 @@
 
 ### Supported OS (Linux / OS X)
 
-## Build:
+## Dependencies:
+GNU GCC compiler
+
+### run 
+```bash
+sudo apt install g++
+```
+
+## Installing Dependencies:
 
 ```bash
-cd build
-./build.sh
+$HOME/TBG/build/install.sh
+```
+
+## Building:
+
+```bash
+$HOME/TBG/build/build.sh
 ```
 
 ## Run:
@@ -16,8 +29,7 @@ cd build
 Open terminal and execute your programm.
 
 ```bash
-cd ../bin
-./run
+$HOME/TBG/bin/run
 ```
 
 ## Contributing
