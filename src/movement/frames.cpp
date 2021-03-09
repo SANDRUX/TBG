@@ -6,19 +6,19 @@ void display_frame(const int mode)
 {
     switch (mode)
     {
-        case int(move::UP):
+        case static_cast<int>(move::UP):
             //TODO
             break;
 
-        case int(move::DOWN):
+        case static_cast<int>(move::DOWN):
             //TODO
             break;
 
-        case int(move::RIGHT):
+        case static_cast<int>(move::RIGHT):
             //TODO
             break;
 
-        case int(move::LEFT):
+        case static_cast<int>(move::LEFT):
             //TODO
             break;
 
