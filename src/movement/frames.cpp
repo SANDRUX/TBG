@@ -2,7 +2,7 @@
 #include <cstdio>
 #include "frames.hpp"
 
-void display_frame(const int mode)
+void display_frame(const int mode, const std::string & conf)
 {
     switch (mode)
     {

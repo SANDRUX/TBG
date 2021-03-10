@@ -11,4 +11,4 @@ enum class move
     LEFT    
 };
 
-void display_frame(const int);
+void display_frame(const int, const std::string &);
