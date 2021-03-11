@@ -4,6 +4,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
 #include "bad_guy.hpp"
 
 tuxSystem::TuxMutex mtx;
@@ -49,7 +51,9 @@ int main()
     window.setFramerateLimit(20);
     sf::Texture sprite;
 
-    if (!sprite.loadFromFile("../design/WARRIORTUX.png"))
+    std::string home = getenv("HOME");
+
+    if (!sprite.loadFromFile(home + "/TBG/design/WARRIORTUX.png"))
     {
         std::cerr << "Could not load texture" << std::endl;
         return 0;
@@ -60,7 +64,7 @@ int main()
 
     sf::Texture bT;
 
-    if (!bT.loadFromFile("../design/button.png", sf::IntRect(0, 0, 200, 80)))
+    if (!bT.loadFromFile(home + "/TBG/design/button.png", sf::IntRect(0, 0, 200, 80)))
     {
         std::cerr << "Could not load texture" << std::endl;
         return 0;
@@ -77,7 +81,7 @@ int main()
 
     sf::SoundBuffer sBuffer;
 
-    if (!sBuffer.loadFromFile("../audio/steps.wav"))
+    if (!sBuffer.loadFromFile(home + "/TBG/audio/steps.wav"))
     {
         std::cerr << "Error occurred when loading sound buffer from a file!";
         exit(EXIT_FAILURE);
@@ -88,7 +92,7 @@ int main()
 
     sf::Music intro;
 
-    if(!intro.openFromFile("../audio/beeh.wav"))
+    if(!intro.openFromFile(home + "/TBG/audio/beeh.wav"))
     {
         std::cerr << "Error caught when loading the musick from a file!";
         return -1;
