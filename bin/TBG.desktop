@@ -3,7 +3,7 @@
 Version=1.0
 Type=Application
 Terminal=false
-Exec=/home/[user]/TBG/bin/run
+Exec=/home/sandro/TBG/bin/run
 Name=TBG
 Comment=TBG
-Icon=/home/[user]/TBG/design/WARRIORTUX.png
+Icon=/home/sandro/TBG/design/WARRIORTUX.png
